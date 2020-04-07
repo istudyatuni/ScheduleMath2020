@@ -2,46 +2,16 @@
 #include <cstring>
 #include <ctime>
 #include <cstdlib>
+
+#include "classes/subject.cpp"
+
 using namespace std;
 class shedule;
 class audit;
 class tutor;
-class subject {///класс предметов
-public:
-	string name;
-	int num; // кол-во пар в неделю
-	string stype; // тип предмета
-	int tId; // id преподавателя
-	subject(){};
-	void print() {
-		cout << "\n* * " << name << ":\n";
-		cout << num << " pair in week\n";
-		cout << stype << endl;
-		cout << "tutor ID: " << tId << "\n";
-	}
-	void input(int i){
-		cout << "\nsubject " << i + 1 << ":\nenter name:";
-		//cin >> name;
-		name = 'a' + i;//to_string(i);
-		num = rand() % 4 + 1;
-		cout << "number pair in week: " << num;
-		cout << "\nsubject type (practic, lection): ";
-		int c = rand() % 2;
-		if (c == 0)
-			stype = "lection";
-		else if (c == 1)
-			stype = "practic";
-		cout << stype;
-		tId = i;
-		cout << "\ntId: " << tId;
-		cout << '\n';
-	}
-	friend void sort_sub(subject a[]);
-	friend void calculate_shedule(subject&, tutor&, shedule&, audit&);
-	int getnum(){
-		return num;
-	}
-};
+
+//subject
+
 class tutor {///преподаватели
 public:
 	int work[4][5];
@@ -270,6 +240,3 @@ int main()
 	return 0;
 }
 //начать с 51 строки - 21 марта. НЕ РАНЬШЕ
-//что то мы уже сделали
-//check for both
-//what next

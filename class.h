@@ -1,7 +1,7 @@
 #ifndef CLASS_H
 #define CLASS_H
 #include <string>
-using namespace std;
+using std::string;
 
 class shedule;
 class audit;
@@ -27,6 +27,7 @@ public:
     string post; //должность (степени) - senior lecturer
                 //docent, academician, professor
     tutor(){};
+    void write_work(int (&a)[4][5]);
     void input_work ();
     void print();
     void input(int i);

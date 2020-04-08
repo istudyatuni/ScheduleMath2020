@@ -1,6 +1,10 @@
-#include "class.h"
 #include <iostream>
-using namespace std;
+#include <cstdlib>
+#include <ctime>
+
+#include "class.h"
+
+using std::cout, std::cin, std::endl, std::swap;
 
 //subject
 
@@ -58,8 +62,14 @@ void input_sub(subject a[]) {
 
 //tutor
 
-//нужен метод записи в массив из массива-параметра
-//void write_work ()
+//уже не нужен метод записи в массив из массива-параметра
+void tutor::write_work (int (&a)[4][5]) {
+    for (int i = 0; i < 4; ++i){
+        for (int j = 0; j < 5; ++j){
+            work[i][j] = a[i][j];
+        }
+    }
+}
 void tutor::input_work () {
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 5; ++j) {
@@ -105,6 +115,8 @@ void tutor::input(int i){
         cout << '\n';
     }
 }
+
+//functions
 
 void print_tut(tutor a[]){
     cout << "table tutors:\n";

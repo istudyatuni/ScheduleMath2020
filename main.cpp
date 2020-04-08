@@ -1,12 +1,7 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-
 #include "class.cpp"
 
-using namespace std;
-
-void calculate_shedule(subject (&sub)[10], tutor (&tut)[10], shedule (&shed)[4][5], audit (&aud)[10])
+void calculate_shedule(subject (&sub)[10], tutor (&tut)[10], 
+						shedule (&shed)[4][5], audit (&aud)[10])
 {
 	for (int i = 0; i < 10; ++i){//цикл по предметам
 		int tmp = sub[i].num;
@@ -121,4 +116,3 @@ int main()
 	system("exit"); */
 	return 0;
 }
-//начать с 51 строки - 21 марта. НЕ РАНЬШЕ

@@ -6,48 +6,6 @@
 
 using namespace std;
 
-//classes
-
-void sort_sub(subject a[]){//сортировка предметов по убыванию часов
-	cout << "sorting . .\n";
-	for (int i = 0; i < 10; i++){
-		for (int j = 0; j < 10 - i - 1; j++){
-			if (a[j].num < a[j+1].num)
-				swap(a[j], a[j+1]);
-			cout << i << '.' << j << "  ";
-		}
-		cout << '\n';
-	}
-}
-void print_sub(subject a[]) {
-	cout << "\ntable subjects:\n";
-	for (int i = 0; i < 10; i++) {
-		a[i].print();
-	}
-	cout << endl;
-}
-void print_tut(tutor a[]){
-	cout << "table tutors:\n";
-	for (int i = 0; i < 10; i++) {
-		a[i].print();
-	}
-	cout << '\n';
-}
-void input_sub(subject a[]) {
-	srand(time(0));
-	cout << "input subjects:\n";
-	for (int i = 0; i < 10; i++) {
-		a[i].input(i);
-	}
-}
-void input_tut(tutor a[]) {
-	srand(time(0));
-	cout << "\nenter tutors:\n";
-	for (int i = 0; i < 10; i++){
-		a[i].input(i);
-	}
-	//return a;
-}
 void calculate_shedule(subject (&sub)[10], tutor (&tut)[10], shedule (&shed)[4][5], audit (&aud)[10])
 {
 	for (int i = 0; i < 10; ++i){//цикл по предметам
@@ -159,12 +117,8 @@ int main()
 			cout << shed[i][j].name;// << " " << shed[i][j].tut << ' ';
 		}
 	}
-	/*
-	system("pause");
-	system("exit");*/
+	/* system("pause");
+	system("exit"); */
 	return 0;
 }
 //начать с 51 строки - 21 марта. НЕ РАНЬШЕ
-//что то мы уже сделали
-//check for both
-//what next

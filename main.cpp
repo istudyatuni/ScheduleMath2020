@@ -5,7 +5,7 @@ void calculate_shedule(subject (&sub)[10], tutor (&tut)[10],
 {
 	for (int i = 0; i < 10; ++i){//цикл по предметам
 		int tmp = sub[i].num;
-		while (tmp > 2){ //если количество часов больше 2
+		while (tmp > 0){ //если количество часов больше 2 - почему не 0?
 			int mx = 0;
 			int k = 0;//номер самого свободного дня
 			for (int j = 0; j < 5; ++j){//сколько пар sub[i] предмета в неделю
@@ -22,22 +22,24 @@ void calculate_shedule(subject (&sub)[10], tutor (&tut)[10],
 			while (tut[sub[i].tId].work[l][k] == 0){
 				l++;//первая строка с единицей
 			}
-			shed[l][k].name = sub[i].name;
-			shed[l][k].tut = tut[sub[i].tId].name;
+			if (shed[l][k].name == "-"){
+				shed[l][k].name = sub[i].name;
+				shed[l][k].tut = tut[sub[i].tId].name;
+			}
 			//в  массиве work пометить у преподавателя занятую пару нулем
 			tut[sub[i].tId].work[l][k] = 0;
 			//tmp уменьшить на единицу
-         tmp--;
-         cout << "\n-------------\n";
-            for (int i = 0; i < 4; ++i, cout << endl){
+	   	    tmp--;
+	        cout << "\n-------------\n";
+            for (int k = 0; k < 4; ++k, cout << endl){
                 for (int j = 0; j < 5; ++j){
-                    cout << shed[i][j].name;// << " " << shed[i][j].tut << ' ';
+                    cout << shed[k][j].name;// << " " << shed[k][j].tut << ' ';
                 }
             }
 		}
 	}
 	/*int temp[5] = { 0, 0, 0, 0, 0 };
-	for (int i = 0; i < 10; ++i){ int nm = sub[i].num;         //цикл по предметам
+	for (int i = 0; i < 10; ++i){ int nm = sub[i].num;//цикл по предметам
 		while(nm > 2){
 			int maks = 0, indmaks;
 			for(int j = 0; j < 5; j++){
@@ -84,25 +86,21 @@ int main()
 {
 	subject sub[10];
 	tutor tut[10];
-    //tut[0].work = {1,0,1,1,1,0,0,0,1,0,1,0,1,0,1,0,1,1,0,1};
-	tut[0].input_work();
 	shedule shed[4][5];
 	audit aud[10];
 
 	input_sub(sub);
 	input_tut(tut);
 
-	print_sub(sub);
-
-
-	print_tut(tut);
+	//print_sub(sub);
+	//print_tut(tut);
 
 	sort_sub(sub);
-	cout << "after sort:\n";
+	cout << "after sort:";
 	print_sub(sub);
 	for (int i = 0; i < 4; ++i){
 		for (int j = 0; j < 5; ++j){
-			shed[i][j].name = '-';
+			shed[i][j].name = "-";
 		}
 	}
 	calculate_shedule(sub, tut, shed ,aud);

@@ -1,98 +1,84 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "class.h"
 
 using std::cout, std::cin, std::endl, std::swap;
 
+std::ifstream f;
+
 //subject
 
 void subject::print() {
-    cout << "\n* * " << name << ":\n";
-    cout << num << " pair in week\n";
-    cout << stype << endl;
-    cout << "tutor ID: " << tId << "\n";
+    cout << name << ", " << num << " pair in week, " << stype << ", tutorID: " << tId;
 }
 void subject::input(int i){
-    cout << "\nsubject " << i + 1 << ":\nenter name:";
+    //cout << "\nsubject " << i + 1 << ":\nenter name: ";
     //cin >> name;
-    name = 'a' + i;//to_string(i);
-    num = rand() % 4 + 1;
-    cout << "number pair in week: " << num;
-    cout << "\nsubject type (practic, lection): ";
+    f >> name; //read from file
+
+    f >> num;
+    //cout << "number pair in week: " << num;
+    //cout << "\nsubject type (practic, lection): ";
+    //cin >> stype;
     int c = rand() % 2;
     if (c == 0)
         stype = "lection";
     else if (c == 1)
         stype = "practic";
-    cout << stype;
     tId = i;
-    cout << "\ntId: " << tId;
-    cout << '\n';
+    //cin >> tId;
+    print();
 }
 
 //functions
 
 void sort_sub(subject a[]){//сортировка предметов по убыванию часов
-    cout << "sorting . .\n";
     for (int i = 0; i < 10; i++){
-        for (int j = 0; j < 10 - i - 1; j++){
+        for (int j = 0; j < 10 - i - 1; j++)
             if (a[j].num < a[j+1].num)
                 swap(a[j], a[j+1]);
-            cout << i << '.' << j << "  ";
-        }
         cout << '\n';
     }
+}
+void input_sub(subject a[]) {
+    f.open("input-sub.txt");
+    srand(time(0));
+    cout << "input subjects:\n";
+    for (int i = 0; i < 10; i++) {
+        a[i].input(i);
+        cout << endl;
+    }
+    f.close();
 }
 void print_sub(subject a[]) {
     cout << "\ntable subjects:\n";
     for (int i = 0; i < 10; i++) {
         a[i].print();
-    }
-    cout << endl;
-}
-void input_sub(subject a[]) {
-    srand(time(0));
-    cout << "input subjects:\n";
-    for (int i = 0; i < 10; i++) {
-        a[i].input(i);
+        cout << endl;
     }
 }
 
 //tutor
 
-//уже не нужен метод записи в массив из массива-параметра
-void tutor::write_work (int (&a)[4][5]) {
-    for (int i = 0; i < 4; ++i){
-        for (int j = 0; j < 5; ++j){
-            work[i][j] = a[i][j];
-        }
-    }
-}
-void tutor::input_work () {
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            cout << i << '.' << j << ": ";
-            cin >> work[i][j];
-        }
-    }
-}
 void tutor::print(){
-    cout << "tutor " << name << ", " << post;
-    cout << "\nwork:\n";
+    cout << "tutor " << name << ", " << post << ",\nwork: ";
     for (int j = 0; j < 4; j++) {
         for (int h = 0; h < 5; h++)
             cout << work[j][h] << ' ';
-        cout << '\n';
+        cout << ' ';// '\n';
     }
-    cout << '\n';
 }
 void tutor::input(int i){
-    cout << "\ntutor " << i + 1 << ":\nenter name:";
+    //cout << "\ntutor " << i + 1 << ":\nenter name: ";
     //cin >> name;
-    name = 'z' - i;
-    cout << "position: ";//enter
+    char tmp;
+    tmp = f.get();
+    name = tmp;
+
+    //cout << "enter position: ";
     int c = rand() % 4;
     if (c == 0)
         post = "senior lecturer";
@@ -103,17 +89,20 @@ void tutor::input(int i){
     else if (c == 3)
         post = "professor";
     //cin >> a[i].post;
-    cout << post << '\n';
-    cout << "work:\n";
+
+    //cout << "work:\n";
     for (int j = 0; j < 4; j++) {
         for (int h = 0; h < 5; h++) {
             //cout << j + 1 << ", " << h + 1 << ": ";
             //cin >> a[i].work[j][h];
-            //work[j][h] = rand() % 2;
-            //cout << work[j][h] << ' ';
+            if ((tmp = f.get()) != EOF)
+                work[j][h] = tmp - '0';
         }
-        cout << '\n';
     }
+    tmp = f.get();//get '\n'
+    print();
+    cout << endl;
+    cout << "\n\n";
 }
 
 //functions
@@ -127,9 +116,11 @@ void print_tut(tutor a[]){
 }
 void input_tut(tutor a[]) {
     srand(time(0));
+    f.open("input-tut.txt");
     cout << "\nenter tutors:\n";
     for (int i = 0; i < 10; i++){
         a[i].input(i);
     }
+    f.close();
     //return a;
 }

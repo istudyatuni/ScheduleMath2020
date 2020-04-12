@@ -44,7 +44,7 @@ void sort_sub(subject a[]){//сортировка предметов по убы
     }
 }
 void input_sub(subject a[]) {
-    f.open("input-sub.txt");
+    f.open("input/input-sub.txt");
     srand(time(0));
     cout << "input subjects:\n";
     for (int i = 0; i < 10; i++) {
@@ -68,7 +68,7 @@ void tutor::print(){
     for (int j = 0; j < 4; j++) {
         for (int h = 0; h < 5; h++)
             cout << work[j][h] << ' ';
-        cout << ' ';// '\n';
+        cout << ' ';
     }
 }
 void tutor::input(int i){
@@ -102,7 +102,7 @@ void tutor::input(int i){
     tmp = f.get();//get '\n'
     print();
     cout << endl;
-    cout << "\n\n";
+    cout << "\n";
 }
 
 //functions
@@ -116,11 +116,46 @@ void print_tut(tutor a[]){
 }
 void input_tut(tutor a[]) {
     srand(time(0));
-    f.open("input-tut.txt");
+    f.open("input/input-tut.txt");
     cout << "\nenter tutors:\n";
     for (int i = 0; i < 10; i++){
         a[i].input(i);
     }
     f.close();
     //return a;
+}
+
+//audit
+
+
+void audit::print() {
+    cout << "audience №" << num << " can contain ";
+    cout << vol << " students\n";
+    cout << "[ID:" << aId << "] type: ";
+    if (type)
+        cout << "with computers";
+    else
+        cout << "simple";
+}
+void audit::input(int i) {
+    aId = i;
+    cout << "enter № audience: ";
+    cin >> num;
+    cout << "enter volume: ";
+    cin >> vol;
+    type = 2;
+    while(type != 0 && type != 1) {
+        cout << "enter type (1 - with computers, 0 - simple): ";
+        cin >> type;
+        if (type != 0 && type != 1) {
+            cout << "error!\n";
+        }
+    }
+}
+
+//shedule
+
+
+void shedule::print() {
+    //maybe write in other file
 }

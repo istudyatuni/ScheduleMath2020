@@ -22,7 +22,7 @@ public:
 
 class tutor {       //преподаватели
 public:
-    int work[4][5];
+    int work[4][5]; //когда преподаватель может
     string name;
     string post;    //должность (степени) - senior lecturer
                     //docent, academician, professor
@@ -39,6 +39,9 @@ class audit {        //аудитории
     int type;       // тип аудитории компьютерная - 1, обычная - 0
 public:
     audit(){};
+    void print();
+    void input(int i);
+
 };
 
 class shedule {     //само расписание
@@ -48,6 +51,7 @@ public:
     int aud;
     friend void calculate_shedule(subject&, tutor&, shedule&, audit&);
     shedule(){};
+    void print();
 };
 
 #endif // CLASS_H

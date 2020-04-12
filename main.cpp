@@ -82,8 +82,7 @@ void calculate_shedule(subject (&sub)[10], tutor (&tut)[10],
 		}
 	}*/
 }
-int main()
-{
+int main() {
 	subject sub[10];
 	tutor tut[10];
 	shedule shed[4][5];
@@ -104,7 +103,7 @@ int main()
 		}
 	}
 	calculate_shedule(sub, tut, shed ,aud);
-	cout << "shedule:" << endl;
+	cout << "\nshedule:" << endl;
 	for (int i = 0; i < 4; ++i, cout << endl){
 		for (int j = 0; j < 5; ++j){
 			cout << shed[i][j].name;// << " " << shed[i][j].tut << ' ';

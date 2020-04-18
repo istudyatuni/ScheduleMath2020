@@ -14,6 +14,17 @@ void calculate_shedule(subject (&sub)[10], tutor (&tut)[10],
                     for (int h = 0; h < 4; ++h){
                         sum += tut[sub[i].tId].work[h][j];
                     }
+                    /*
+                    int sumOpen = 0, sumClose = 0;
+                    for (int h = 0; h < 4; ++h){
+                        sumOpen += tut[sub[i].tId].work[h][j];
+                        //если в расписании на данном месте уже стоит пара текущего предмета
+                        if (shed[h][j].name == sub[i].name){
+                            sumClose++;
+                        }
+                    }
+                    int sum = abs(sumOpen - sumClose);
+                    */
                     if (sum > mx){
                         mx = sum;
                         k = j;//запомнить номер дня

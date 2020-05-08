@@ -1,4 +1,6 @@
-#include "class.cpp"
+#include <iostream>
+#include "class.h"
+using std::cout;
 
 void calculate_shedule(subject (&sub)[10], tutor (&tut)[10], 
                         shedule (&shed)[4][5], audit (&aud)[10])
@@ -43,7 +45,7 @@ void calculate_shedule(subject (&sub)[10], tutor (&tut)[10],
                 //tmp уменьшаем
                 tmp -= l;
                 cout << "\n-------------\n";
-                for (int k = 0; k < 4; ++k, cout << endl){
+                for (int k = 0; k < 4; ++k, cout << '\n'){
                     for (int j = 0; j < 5; ++j){
                         cout << shed[k][j].name;// << " " << shed[k][j].tut << ' ';
                     }
@@ -115,8 +117,8 @@ int main() {
         }
     }
     calculate_shedule(sub, tut, shed ,aud);
-    cout << "\nshedule:" << endl;
-    for (int i = 0; i < 4; ++i, cout << endl){
+    cout << "\nshedule:" << '\n';
+    for (int i = 0; i < 4; ++i, cout << '\n'){
         for (int j = 0; j < 5; ++j){
             cout << shed[i][j].name;// << " " << shed[i][j].tut << ' ';
         }

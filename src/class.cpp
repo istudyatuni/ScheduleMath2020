@@ -5,7 +5,10 @@
 
 #include "class.h"
 
-using std::cout, std::cin, std::endl, std::swap;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::swap;
 
 std::ifstream f;
 

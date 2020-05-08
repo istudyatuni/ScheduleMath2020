@@ -54,4 +54,12 @@ public:
     void print();
 };
 
+void calculate_shedule(subject (&sub)[10], tutor (&tut)[10], 
+                        shedule (&shed)[4][5], audit (&aud)[10]);
+void sort_sub(subject a[]);
+void input_sub(subject a[]);
+void print_sub(subject a[]);
+void print_tut(tutor a[]);
+void input_tut(tutor a[]);
+
 #endif // CLASS_H

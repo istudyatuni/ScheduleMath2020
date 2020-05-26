@@ -48,6 +48,8 @@ void sort_sub(subject a[]){//сортировка предметов по убы
 }
 void input_sub(subject a[]) {
     f.open("input/input-sub.txt");
+    if (!f.is_open())
+        return;
     srand(time(0));
     cout << "input subjects:\n";
     for (int i = 0; i < 10; i++) {
@@ -120,6 +122,8 @@ void print_tut(tutor a[]){
 void input_tut(tutor a[]) {
     srand(time(0));
     f.open("input/input-tut.txt");
+    if (!f.is_open())
+        return;
     cout << "\nenter tutors:\n";
     for (int i = 0; i < 10; i++){
         a[i].input(i);

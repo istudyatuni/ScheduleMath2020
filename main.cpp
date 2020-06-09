@@ -7,9 +7,11 @@ using namespace std;
 
 class Table {
     vector<map<int, string>> m_line;
-    //0 - title, 1 - type, 2 - name, 3 - requirements, 4 - freedom location
-    map<string, string> audience;
-    string count_suitable_audience(int i) {
+    //0 - title, 1 - type, 2 - teacher's name, 3 - requirements
+    map<string, string> audience;//number, additional info
+    map<string, int> teachers;// teacher's name, number lessons
+    map<int, double> freedom;//line[i], value
+    int count_suitable_audience(int i) {
         map<string, string>::iterator it = audience.begin();
         int a = 0;
         for (;it != audience.end(); it++) {
@@ -17,17 +19,35 @@ class Table {
                 a++;
             }
         }
-        string s = to_string(a);
-        return s;
+        return a;
+    }
+    double count_lessons_teacher(int i) {
+        string a = m_line[i][2];
+        map<string, int>::iterator tch = teachers.begin();
+        for (;tch != teachers.end(); tch++) {
+            if (tch->first == a) {
+                return tch->second;
+            }
+        }
+        return 0;
     }
     void freedom_location() {
-        for (int i = 1; i < m_line.size(); i++) {
-            m_line[i][4] = count_suitable_audience(i);
+        double a, p, g = 18;
+        // т.к g - количество занятий в неделю у заданной группы, а группа одна
+        int s = m_line.size();
+        for (int i = 1; i < s; i++) {
+            a = count_suitable_audience(i);
+            p = count_lessons_teacher(i);
+            freedom[i] = a / (p * g);
         }
     }
     void read_data() {     
         ifstream file("input/lessons.txt");
         string a;
+        if (!file.is_open()) {
+            cerr << 1 << " file isn't open";
+            exit(1);
+        }
         for (int i = 1; !file.eof(); ++i) {
             getline(file, a);
             m_line[i][0] = a;
@@ -45,11 +65,29 @@ class Table {
         }
         file.close();
         file.open("input/audience.txt");
+        if (!file.is_open()) {
+            cerr << 2 << " file isn't open";
+            exit(1);
+        }
         while(!file.eof()) {
             string i;
             getline(file, i);
             getline(file, a);
             audience[i] = a;
+        }
+        file.close();
+        file.open("input/teachers.txt");
+        if (!file.is_open()) {
+            cerr << 3 << " file isn't open";
+            exit(1);
+        }
+        while(!file.eof()) {
+            getline(file, a);
+            string i;
+            getline(file, i);
+            //int i;
+            //file >> i; don't work correctly
+            teachers[a] = stoi(i);
         }
         file.close();
     }
@@ -66,14 +104,18 @@ class Table {
                 cout.fill('_');
             }
             cout << setw(width) << left << '\t' << a;
-            cout.fill(' ');
             j++;
         }
+        if (i != 0) {
+            cout << setw(15) << right << freedom[i];
+        }
         cout << '\n';
+        cout.fill(' ');
     }
 public:
     Table() {
-        m_line.resize(20);//5 days 4 lessons
+        m_line.resize(19);//5 days 4 lessons and table header
+        //но фактически 18 пар на неделе
         m_line[0][0] = "Название";
         m_line[0][1] = "Тип";
         m_line[0][2] = "Имя преподавателя";
@@ -84,14 +126,20 @@ public:
         print();
     }
     void print() {
-        for (int i = 0; i < m_line.size(); i++) {
+        int s = m_line.size();
+        for (int i = 0; i < s; i++) {
             print_line(i);
         }
         cout << "\naudience  | requirements\n";
-        map<string, string>::iterator it = audience.begin();
-        for (;it != audience.end(); it++) {
+        map<string, string>::iterator ad = audience.begin();
+        for (;ad != audience.end(); ad++) {
             cout << setw(12) << left;
-            cout << it->first << it->second << '\n';
+            cout << ad->first << ad->second << '\n';
+        }
+        cout << "\nСколько пар в неделю ведет каждый учитель:\n";
+        map<string, int>::iterator tch = teachers.begin();
+        for (;tch != teachers.end(); tch++) {
+            cout << setw(4) << left << tch->second << tch->first << '\n';
         }
     }
 };

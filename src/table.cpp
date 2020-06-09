@@ -33,8 +33,10 @@ void Table::freedom_location() {
     for (int i = 1; i < s; i++) {
         a = count_suitable_audience(i);
         p = count_lessons_teacher(i);
-        freedom[i] = a / (p * g);
+        freedom[i - 1] = a / (p * g);
     }
+    //maybe replace this call
+    sort_by_freedom();
 }
 
 void Table::read_data() {     
@@ -104,10 +106,25 @@ void Table::print_line(int i) {
         j++;
     }
     if (i != 0) {
-        cout << setw(15) << right << freedom[i];
+        cout << setw(20) << right << freedom[i - 1];
     }
     cout << '\n';
     cout.fill(' ');
+}
+
+void Table::sort_by_freedom() {
+    // bubble
+    //in freedom indexing from 0,
+    //but in m_line from 1
+    int n = freedom.size();
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (freedom[j] > freedom[j + 1]) {
+                swap(freedom[j], freedom[j + 1]);
+                swap(m_line[j + 1], m_line[j + 2]);
+            }
+        }
+    }
 }
 
 Table::Table() {

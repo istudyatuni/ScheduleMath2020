@@ -16,6 +16,7 @@ class Table {
     void freedom_location();
     void read_data();
     void print_line(int i);
+    void sort_by_freedom();
 public:
     Table();
     void print();

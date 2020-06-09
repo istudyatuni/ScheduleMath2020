@@ -1,9 +1,10 @@
 #!/bin/bash
 name=shedule
-if [ ! -d build ]; then
-    mkdir build
+build=bin
+if [ ! -d $build ]; then
+    mkdir $build
 fi
-cd build
+cd $build
 if [ ! -e Makefile ]; then
     cmake ..
 fi

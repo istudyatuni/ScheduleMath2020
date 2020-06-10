@@ -134,7 +134,5 @@ int main() {
             cout << shed[i][j].name;// << " " << shed[i][j].tut << ' ';
         }
     }
-    /* system("pause");
-    system("exit"); */
     return 0;
 }

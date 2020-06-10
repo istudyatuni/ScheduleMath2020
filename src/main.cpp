@@ -1,6 +1,6 @@
-#include "table.h"
+#include "shedule.h"
 
 int main() {
-    Table table;
+    Shedule shedule;
     return 0;
 }

@@ -137,7 +137,7 @@ Table::Table() {
     m_line[0][4] = "Свобода расположения";
     read_data();
     freedom_location();
-    print();
+    //print();
 }
 
 void Table::print() {

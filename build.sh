@@ -1,17 +1,37 @@
 #!/bin/bash
 name=shedule
-build=bin
-if [ ! -d $build ]; then
-    mkdir $build
+
+#BUILD=Release
+BUILD=Debug
+
+MAKE=ninja
+#MAKE=make
+
+if [ $MAKE = ninja ]; then
+    makefile=build.ninja
+    gen="-G Ninja"
+elif [ $MAKE = make ]; then
+    makefile=Makefile
+    # Unix Makefiles as default
 fi
-cd $build
-if [ ! -e Makefile ]; then
-    cmake ..
+
+build_dir=bin/$BUILD
+
+if [ ! -d bin ]; then
+    mkdir bin
 fi
-make
+if [ ! -d $build_dir ]; then
+    mkdir $build_dir
+fi
+cd $build_dir
+if [ ! -e $makefile ]; then
+    cmake $gen -DCMAKE_BUILD_TYPE=$BUILD ../..
+fi
+rm -f $name
+$MAKE
 if [ -e $name ]; then
-    mv $name ../$name
-    cd ..
+    cp $name ../../$name
+    cd ../..
     echo -e '\n'
     ./$name
     echo -e

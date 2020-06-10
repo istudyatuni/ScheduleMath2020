@@ -1,3 +1,6 @@
+#ifndef TABLE_H
+#define TABLE_H
+
 #include <iostream>
 #include <vector>
 #include <map>
@@ -5,8 +8,11 @@ using std::map;
 using std::string;
 
 class Table {
+protected:
     std::vector<map<int, string>> m_line;
     //0 - title, 1 - type, 2 - teacher's name, 3 - requirements
+
+private:
     map<string, string> audience;//number, additional info
     map<string, int> teachers;// teacher's name, number lessons
     map<int, double> freedom;//line[i], value
@@ -21,3 +27,5 @@ public:
     Table();
     void print();
 };
+
+#endif // TABLE_H

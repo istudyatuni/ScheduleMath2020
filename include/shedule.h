@@ -3,7 +3,7 @@
 
 #include "table.h"
 
-class Shedule : public Table
+class Shedule : private Table
 {
     string m_shedule[6][5];
 /*  0               1    2    3    4    5
@@ -23,23 +23,13 @@ class Shedule : public Table
     1 пара: ...
 */
 
-    void find_good_time(); // aka calculate
-public:
-    Shedule():Table(){
-        m_shedule[0][0] = "";
-        m_shedule[0][1] = "9:45 - 11:10";
-        m_shedule[0][2] = "11:30 - 13:05";
-        m_shedule[0][3] = "13:15 - 14:50";
-        m_shedule[0][4] = "15:00 - 16:35";
+    static const int number_of_criteria = 7;
+    double weight[number_of_criteria];//весовые коэффиценты для критериев оценки качества расположения занятий
 
-        m_shedule[1][0] = "Понедельник";
-        m_shedule[2][0] = "Вторник";
-        m_shedule[3][0] = "Среда";
-        m_shedule[4][0] = "Четверг";
-        m_shedule[5][0] = "Пятница";
-        find_good_time();
-        print();
-    }
+    void set_shedule(); // aka calculate
+    void find_good_time(int);
+public:
+    Shedule();
     void print();
 };
 

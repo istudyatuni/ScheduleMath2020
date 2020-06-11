@@ -11,7 +11,7 @@ class Table {
 protected:
     std::vector<map<int, string>> m_line;
     //0 - title, 1 - type, 2 - teacher's name, 3 - requirements
-
+    //m_line[0][i] - table header
 private:
     map<string, string> audience;//number, additional info
     map<string, int> teachers;// teacher's name, number lessons

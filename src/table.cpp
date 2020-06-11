@@ -40,10 +40,10 @@ void Table::freedom_location() {
 }
 
 void Table::read_data() {     
-    ifstream file("input/lessons.txt");
-    string a;
+    string a = "input/lessons.txt";
+    ifstream file(a);
     if (!file.is_open()) {
-        cerr << 1 << " file isn't open";
+        cerr << a << " file isn't open";
         exit(1);
     }
     for (int i = 1; !file.eof(); ++i) {
@@ -58,13 +58,12 @@ void Table::read_data() {
 
         getline(file, a);
         m_line[i][3] = a;
-
-        getline(file, a);//skip empty line
     }
     file.close();
-    file.open("input/audience.txt");
+    a = "input/audience.txt";
+    file.open(a);
     if (!file.is_open()) {
-        cerr << 2 << " file isn't open";
+        cerr << a << " file isn't open";
         exit(1);
     }
     while(!file.eof()) {
@@ -74,9 +73,10 @@ void Table::read_data() {
         audience[i] = a;
     }
     file.close();
-    file.open("input/teachers.txt");
+    a = "input/teachers.txt";
+    file.open(a);
     if (!file.is_open()) {
-        cerr << 3 << " file isn't open";
+        cerr << a << " file isn't open";
         exit(1);
     }
     while(!file.eof()) {
@@ -137,7 +137,6 @@ Table::Table() {
     m_line[0][4] = "Свобода расположения";
     read_data();
     freedom_location();
-    //print();
 }
 
 void Table::print() {

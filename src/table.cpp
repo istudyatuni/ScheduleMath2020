@@ -128,7 +128,8 @@ void Table::sort_by_freedom() {
 }
 
 Table::Table() {
-    m_line.resize(19);//5 days 4 lessons and table header
+    m_number_lessons = 18;
+    m_line.resize(m_number_lessons + 1);//5 days 4 lessons and table header
     //но фактически 18 пар на неделе
     m_line[0][0] = "Название";
     m_line[0][1] = "Тип";

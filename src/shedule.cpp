@@ -1,21 +1,36 @@
 #include "shedule.h"
 
-void Shedule::set_shedule() {
+double Shedule::set_shedule() {
     int n = m_line.size();
+    double quality = 0;
     for (int i = 1; i < n; ++i) {
-        find_good_time(i);
+        quality += find_good_time(i);
     }
+    return quality;
 }
 
-void Shedule::find_good_time(int i) {
-    int n = m_line.size();
-    for (int j = 1; j < n; ++j) {
+double Shedule::find_good_time(const int i) {
+    double R[m_number_lessons] = { 0 };
+    double maxR = 0;
+    int line;//for place in shedule when maxR is right
 
+    // 3rd and 4 formula
+    for (int l = 0; l < 20; ++l) {
+        //R[l] = w[j] * k[j][l]
+        for (int j = 0; j < number_of_criteria; ++j) {
+            //criterion number j for l-line in shedule
+            R[l] += weight[j] * criterion(j, l);
+        }
+        if (R[l] > maxR) {
+            maxR = R[l];
+            line = l;
+        } else if (l == 0) {
+            maxR = R[l];
+            line = l;
+        }
     }
-
-
-
-    //here we must get R[i] and place l in the shedule for i lesson
+    m_shedule[line / 5 + 1][line % 5 + 1] = m_line[i][0];
+    return maxR;
 }
 
 Shedule::Shedule():Table(){
@@ -35,8 +50,9 @@ Shedule::Shedule():Table(){
         weight[i] = 1;
     }
 
-    set_shedule();
-    //print();
+    double qu = set_shedule();
+    print();
+    std::cout << "\nShedule quality is " << qu;
 }
 
 void Shedule::print() {
@@ -44,7 +60,7 @@ void Shedule::print() {
     std::cout << "\n\t\tРасписание\n";
     char en = '\n';
     for (int i = 1; i < 6; ++i) {
-        std::cout << m_shedule[i][0] << en;
+        std::cout << en << m_shedule[i][0] << en;
         for (int j = 1; j < 5; ++j) {
             std::cout << m_shedule[0][j] << ": " << m_shedule[i][j] << en;
         }

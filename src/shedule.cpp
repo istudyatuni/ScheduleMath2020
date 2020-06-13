@@ -1,4 +1,5 @@
 #include "shedule.h"
+#include "criteria.h"
 
 double Shedule::set_shedule() {
     int n = m_line.size();

@@ -29,8 +29,6 @@ private:
 public:
     Table();
     void print();
-
-    friend class Criteria;
 };
 
 #endif // TABLE_H

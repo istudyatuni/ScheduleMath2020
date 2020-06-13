@@ -7,11 +7,11 @@ double criterion(int crit, int place, Shedule* shed) {
         return calculation.criteria_value[crit];
     }
     // заранее посчитаем критерии для определённой линии
-    calculation.criteria_value[0] = calculation.overlap_lessons(); // 1st
+    calculation.criteria_value[0] = calculation.overlap_lessons(shed); // 1st
     calculation.last_criterion_number = place;
     return calculation.criteria_value[crit];
 }
 
-double Criteria::overlap_lessons() {
+double Criteria::overlap_lessons(Shedule* shed) {
     return 1;
 }

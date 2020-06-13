@@ -2,7 +2,8 @@
 #define SHEDULE_H
 
 #include "table.h"
-#include "criteria.h"
+
+const int number_of_criteria = 7;
 
 class Shedule : private Table
 {

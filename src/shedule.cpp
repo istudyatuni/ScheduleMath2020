@@ -9,17 +9,51 @@ double Shedule::set_shedule() {
     return quality;
 }
 
+void lost_lesson(string a, int x, int y) {
+    string day;
+    if (x == 1) {
+        day = "Понедельник ";
+    } else if (x == 2) {
+        day = "Вторник ";
+    } else if (x == 3) {
+        day = "Среда ";
+    } else if (x == 4) {
+        day = "Четверг ";
+    } else if (x == 5) {
+        day = "Пятница ";
+    }
+    std::cout << day << y << " пара, lost " << a << '\n';
+}
+
 double Shedule::find_good_time(const int i) {
     double R[m_number_lessons] = { 0 };
     double maxR = 0;
     int line;//for place in shedule when maxR is right
 
     // 3rd and 4 formula
+    map<string, string>::const_iterator aud;
+    string a;
     for (int l = 0; l < 20; ++l) {
-        //R[l] = w[j] * k[j][l]
-        for (int j = 0; j < number_of_criteria; ++j) {
-            //criterion number j for l-line in shedule
-            R[l] += weight[j] * criterion(j, l);
+        // R[l] = w[j] * k[j][l]
+        for (aud = audience.begin(); aud != audience.end(); aud++) {
+            // look over audience
+            string req = aud->first;
+            a = audience[req];
+            // without line above get this:
+            // terminate called after throwing an instance of 'std::bad_alloc'
+            //   what():  std::bad_alloc
+            req = aud->second;
+            if (req != m_line[i][3]) {
+                continue; // compare requirements for audience and lesson
+                // 2nd criterion
+            }
+            for (int j = 0; j < number_of_criteria; ++j) {
+                // look over shedule
+                // criterion number j for l-line in shedule
+                R[l] += weight[j] * criterion(j, l);
+                // if print below worked, quality is changed
+                //std::cout << i << ' ' << l << '.' << j << '\n';
+            }
         }
         if (R[l] > maxR) {
             maxR = R[l];
@@ -29,7 +63,12 @@ double Shedule::find_good_time(const int i) {
             line = l;
         }
     }
-    m_shedule[line / 5 + 1][line % 5 + 1] = m_line[i][0];
+    int x = line / 5 + 1, y = line % 5 + 1;
+    if (m_shedule[x][y] == "") {
+        m_shedule[x][y] = a + ' ' + m_line[i][0];
+    } else {
+        lost_lesson(m_line[i][0], x, y);
+    }
     return maxR;
 }
 
@@ -56,7 +95,7 @@ Shedule::Shedule():Table(){
 }
 
 void Shedule::print() {
-    Table::print();
+    //Table::print();
     std::cout << "\n\t\tРасписание\n";
     char en = '\n';
     for (int i = 1; i < 6; ++i) {

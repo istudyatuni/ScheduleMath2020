@@ -27,7 +27,7 @@ double Table::count_lessons_teacher(int i) {
 }
 
 void Table::freedom_location() {
-    double a, p, g = 18;
+    double a, p, g = m_number_lessons;
     // т.к g - количество занятий в неделю у заданной группы, а группа одна
     int s = m_line.size();
     for (int i = 1; i < s; i++) {
@@ -39,12 +39,17 @@ void Table::freedom_location() {
     sort_by_freedom();
 }
 
+void input_file_isnt_open(string a) {
+    cerr << a << " file isn't open\n";
+    cerr << "Try to put executable file in the folder where the input folder is located";
+    exit(1);
+}
+
 void Table::read_data() {     
     string a = "input/lessons.txt";
     ifstream file(a);
     if (!file.is_open()) {
-        cerr << a << " file isn't open";
-        exit(1);
+        input_file_isnt_open(a);
     }
     for (int i = 1; !file.eof(); ++i) {
         getline(file, a);
@@ -63,8 +68,7 @@ void Table::read_data() {
     a = "input/audience.txt";
     file.open(a);
     if (!file.is_open()) {
-        cerr << a << " file isn't open";
-        exit(1);
+        input_file_isnt_open(a);
     }
     while(!file.eof()) {
         string i;
@@ -76,8 +80,7 @@ void Table::read_data() {
     a = "input/teachers.txt";
     file.open(a);
     if (!file.is_open()) {
-        cerr << a << " file isn't open";
-        exit(1);
+        input_file_isnt_open(a);
     }
     while(!file.eof()) {
         getline(file, a);

@@ -1,5 +1,6 @@
 #!/bin/bash
 name=shedule
+trap "rm -f $name" EXIT
 
 #BUILD=Release
 BUILD=Debug
@@ -41,5 +42,4 @@ if [ -e $name ]; then
     echo -e '\n'
     ./$name
     echo -e
-    rm -f $name
 fi

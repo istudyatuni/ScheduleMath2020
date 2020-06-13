@@ -15,8 +15,8 @@ protected:
     //m_line[0][i] - table header
 
     //sorry for using numbering from 1 (0 line is header for output)
-private:
     map<string, string> audience;//number, additional info
+private:
     map<string, int> teachers;// teacher's name, number lessons
     map<int, double> freedom;//line[i], value
 

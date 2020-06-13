@@ -32,25 +32,22 @@ double Shedule::find_good_time(const int i) {
 
     // 3rd and 4 formula
     map<string, string>::const_iterator aud;
-    string a;
+    string a, req;
     for (int l = 0; l < 20; ++l) {
-        // R[l] = w[j] * k[j][l]
+        // look over shedule
         for (aud = audience.begin(); aud != audience.end(); aud++) {
             // look over audience
-            string req = aud->first;
+            req = aud->first;
             a = audience[req];
-            // without line above get this:
-            // terminate called after throwing an instance of 'std::bad_alloc'
-            //   what():  std::bad_alloc
             req = aud->second;
             if (req != m_line[i][3]) {
                 continue; // compare requirements for audience and lesson
                 // 2nd criterion
             }
             for (int j = 0; j < number_of_criteria; ++j) {
-                // look over shedule
+                // look over criteria
                 // criterion number j for l-line in shedule
-                R[l] += weight[j] * criterion(j, l);
+                R[l] += weight[j] * criterion(j, l, this);
                 // if print below worked, quality is changed
                 //std::cout << i << ' ' << l << '.' << j << '\n';
             }

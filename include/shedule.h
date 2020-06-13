@@ -31,6 +31,8 @@ class Shedule : private Table
 public:
     Shedule();
     void print();
+
+    friend class Criteria;
 };
 
 #endif // SHEDULE_H

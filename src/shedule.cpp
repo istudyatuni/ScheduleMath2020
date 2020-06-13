@@ -38,9 +38,9 @@ double Shedule::find_good_time(const int i) {
         // look over shedule
         for (aud = audience.begin(); aud != audience.end(); aud++) {
             // look over audience
-            req = aud->first;
-            a = audience[req];
             req = aud->second;
+            a = aud->first;
+            // std::cout << l << ' ' << a << ' ' << req << ' ' << m_line[i][3] << '\n';
             if (req != m_line[i][3]) {
                 continue; // compare requirements for audience and lesson
                 // 2nd criterion

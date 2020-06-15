@@ -3,7 +3,8 @@
 
 #include "table.h"
 
-const int number_of_criteria = 7;
+const int number_of_criteria = 4;
+// need real number of criteria + 1
 
 class Shedule : private Table
 {

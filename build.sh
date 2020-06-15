@@ -1,6 +1,5 @@
 #!/bin/bash
 name=shedule
-trap "rm -f $name" EXIT
 
 #BUILD=Release
 BUILD=Debug
@@ -22,11 +21,8 @@ fi
 
 build_dir=bin/$BUILD
 
-if [ ! -d bin ]; then
-    mkdir bin
-fi
 if [ ! -d $build_dir ]; then
-    mkdir $build_dir
+    mkdir -p $build_dir
 fi
 cd $build_dir
 
@@ -37,9 +33,8 @@ rm -f $name
 
 $MAKE
 if [ -e $name ]; then
-    cp $name ../../$name
     cd ../..
     echo -e '\n'
-    ./$name
-    echo -e
+    $build_dir/$name
+    echo
 fi
